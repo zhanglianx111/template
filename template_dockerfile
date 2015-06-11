@@ -1,0 +1,44 @@
+FROM <image>:<tag >
+MAINTAINER <maintainer_name@xxx.com>
+
+# 指定运行容器时的用户名或UID
+USER <user_name>
+
+# 为后续RUN,CMD,ENTRYPOINT配置工作目录
+WORKDIR </path/to/workdir/>
+
+# 创建一个从宿主机或其他容器的挂载点
+VOLUME ["/path/in/container"]
+
+# 容器暴露的端口号
+EXPOSE <port_number> [...] 
+
+ENV <key> <value>
+
+# 复制本地主机的src(为dockerfile的相对路径)到容器的dest,当src为本地源时，推荐使用COPY
+COPY <src> <dest>
+
+# 复制本地主机的src(为dockerfile的相对路径)到容器的dest，src可以使tar或url
+ADD run-httpd.sh /run-httpd.sh
+
+# 使用/bin/bash -c或其他shell方式执行命令
+RUN <command param1 param2 ...>
+
+# 使用exec执行
+RUN ["command", "param1", "param2", ...]
+
+
+RUN chmod -v +x /run-httpd.sh
+
+# 使用exec方式执行，推荐方式。e.g CMD ["/bin/bash", "-c", "echo xxxx"]
+CMD ["command", "param1", "param2", ...]
+
+# 使用/bin/bash -c或/bin/sh -c方式执行命令，提供需要交互的应用
+CMD <command param1 param2 ...>
+
+# 提供给ENTRYPOINT的默认参数
+CMD ["param1", "param2"]
+
+# 容器启动时执行的命令，每个dockerfile中只能有一个ENTRYPOINT，当有多个时，最后一个生效
+ENTRYPOINT ["command", "param1", "param2", ...]
+ENTRYPOINT <command param1 param2 ...>
