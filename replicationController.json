@@ -1,0 +1,25 @@
+{
+  "id": "rccyf",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "labels": {"name": "rcApp"},
+  "desiredState": {
+    "replicas": 4,
+    "replicaSelector": {"name": "cyfapp"},
+    "podTemplate": {
+      "desiredState": {
+        "manifest": {
+          "version": "v1beta1",
+          "id": "cyfapp",
+          "volumes": [{"name": "logs", "hostPath": {"path": "/letv/logs"}}],
+          "containers": [{
+            "name": "app",
+            "image": "cyf/app",
+            "ports": [{"containerPort": 80, "hostPort": 0}],
+            "volumeMounts": [{"name": "logs", "mountPath": "/letv/logs"}]
+          }]
+        }
+      },
+      "labels": {"name": "cyfapp"}
+    }}
+}
