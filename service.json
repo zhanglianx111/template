@@ -1,0 +1,15 @@
+{
+  "id": "cyfapp-se",
+  "kind": "Service",
+  "apiVersion": "v1beta1",
+  "publicIPs": ["10.154.156.230", "10.154.156.233"],
+  "containerPort": 8080,
+  "port": 9000,
+  "selector": {
+    "name": "cyfapp"
+  },
+  "labels": {
+    "name": "se-cyfapp"
+  },
+  "createExternalLoadBalancer": false
+}
